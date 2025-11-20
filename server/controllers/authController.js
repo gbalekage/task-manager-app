@@ -106,4 +106,4 @@ const getUser = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser, login };
+module.exports = { createUser, login, getUser };
