@@ -5,6 +5,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/database");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +13,8 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/api/auth", authRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

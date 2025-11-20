@@ -83,4 +83,27 @@ const login = async (req, res, next) => {
   }
 };
 
+const getUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return next(new HttpError("User not found!", 404));
+    }
+
+    res.status(200).json({
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        isActive: user.isActive,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return next(new HttpError("Server error", 500));
+  }
+};
+
 module.exports = { createUser, login };
