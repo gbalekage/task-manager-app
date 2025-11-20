@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
     if (!isPasswordValid) {
       return next(new HttpError("Incorrect password", 400));
     }
-    
+
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET,
@@ -83,4 +83,4 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser };
+module.exports = { createUser, login };
