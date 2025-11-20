@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
+const connectDB = require("./config/database");
 require("dotenv").config();
 
 const app = express();
@@ -10,6 +11,9 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use(notFound)
-app.use(errorHandler)
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.use(notFound);
+app.use(errorHandler);
+app.listen(port, () => {
+  connectDB();
+  console.log(`Server running on port ${port}`);
+});
