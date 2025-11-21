@@ -88,6 +88,7 @@ const getUser = async (req, res, next) => {
     }
 
     res.status(200).json({
+      message: "Got user",
       user: {
         id: user._id,
         name: user.name,

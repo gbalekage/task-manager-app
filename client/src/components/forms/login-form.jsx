@@ -20,15 +20,19 @@ export function LoginForm({ className, ...props }) {
     setLoading(true);
     try {
       const res = await api.post("/auth/login", { email, password });
+
+      // Save token and user ID
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
 
-      navigate("/");
+      // Optional: small delay before navigation
+      setTimeout(() => {
+        navigate("/");
+      }, 50); // 50ms delay
     } catch (error) {
       console.log(error);
       toast.error(
-        error.response?.data?.message ||
-          "An error occurred while create account"
+        error.response?.data?.message || "An error occurred while signing in"
       );
     } finally {
       setLoading(false);
