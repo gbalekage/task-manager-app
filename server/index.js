@@ -1,16 +1,15 @@
 const express = require("express");
 const cors = require("cors");
-const notFound = require("./middlewares/notFound");
-const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/database");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
+const { notFound, errorHandler } = require("./middlewares/error");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
 

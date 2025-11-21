@@ -1,27 +1,42 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SignInPage from "./pages/auth/sign-in";
 import SignUpPage from "./pages/auth/sign-up";
 import HomePage from "./pages/main/home-page";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "sonner";
+import RequireAuth from "./components/protectedRoutes";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="auth">
-        <Route path="sign-in" element={<SignInPage />} />
-        <Route path="sign-up" element={<SignUpPage />} />
-      </Route>
+    <>
+      <Routes>
+        <Route path="auth">
+          <Route path="sign-in" element={<SignInPage />} />
+          <Route path="sign-up" element={<SignUpPage />} />
+        </Route>
 
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        }
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <HomePage />
+            </RequireAuth>
+          }
+        />
+      </Routes>
+
+      {/* Global toast container */}
+      <Toaster
+        position="bottom-center"
+        richColors
+        toastOptions={{
+          style: {
+            fontSize: "0.8rem",
+            padding: "0.5rem 1rem",
+            minWidth: "200px",
+          },
+        }}
       />
-    </Routes>
+    </>
   );
 };
 

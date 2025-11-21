@@ -3,17 +3,33 @@ import { GalleryVerticalEnd, Loader, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "@/lib/axios";
+import { toast } from "sonner";
 
 export function LoginForm({ className, ...props }) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLoading = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      const res = await api.post("/auth/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data.user.id);
+
+      navigate("/");
     } catch (error) {
+      console.log(error);
+      toast.error(
+        error.response?.data?.message ||
+          "An error occurred while create account"
+      );
     } finally {
       setLoading(false);
     }
@@ -21,7 +37,7 @@ export function LoginForm({ className, ...props }) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={handleLoading}>
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center">
           <Link to="/" className="flex flex-col items-center gap-2 font-medium">
@@ -49,6 +65,7 @@ export function LoginForm({ className, ...props }) {
             type="email"
             placeholder="m@example.com"
             className={"mt-2"}
+            onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
           />
         </div>
@@ -62,6 +79,7 @@ export function LoginForm({ className, ...props }) {
             id="password"
             type="password"
             placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
             className={"mt-2"}
             disabled={loading}
           />
