@@ -40,7 +40,7 @@ const TaskCard = ({
   return (
     <Card className="hover:shadow-lg transition relative w-full sm:w-auto">
       <CardHeader className="px-4 py-3 sm:px-6 sm:py-4">
-        <h2 className="font-semibold text-lg sm:text-xl text-foreground break-words">
+        <h2 className="font-semibold text-lg sm:text-xl text-foreground">
           {task.title}
         </h2>
 
