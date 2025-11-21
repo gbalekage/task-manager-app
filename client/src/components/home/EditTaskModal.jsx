@@ -8,6 +8,7 @@ const EditTaskModal = ({
   setEditForm,
   setShowEditModal,
   handleUpdateTask,
+  editing,
 }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
@@ -36,8 +37,14 @@ const EditTaskModal = ({
           <Button onClick={() => setShowEditModal(false)} variant="outline">
             Cancel
           </Button>
-          <Button onClick={() => handleUpdateTask({ ...task, ...editForm })}>
-            Save
+          <Button
+            onClick={() => {
+              handleUpdateTask(task._id, editForm);
+              setShowEditModal(false);
+            }}
+            disabled={editing}
+          >
+            {editing ? "Saving..." : "Save"}
           </Button>
         </div>
       </div>

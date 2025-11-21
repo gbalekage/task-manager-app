@@ -106,9 +106,9 @@ const finishTask = async (req, res, next) => {
     }
 
     const now = new Date();
-    const elapsedMinutes = Math.floor((now - task.startedAt) / 1000 / 60);
+    const elapsedSeconds = Math.floor((now - task.startedAt) / 1000); // in seconds
 
-    task.timeSpent += elapsedMinutes;
+    task.timeSpent += elapsedSeconds;
     task.started = false;
     task.startedAt = null;
     task.isDone = true;
