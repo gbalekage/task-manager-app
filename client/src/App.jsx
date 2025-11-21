@@ -24,10 +24,10 @@ const App = () => {
         />
       </Routes>
 
-      {/* Global toast container */}
       <Toaster
         position="bottom-center"
         richColors
+        closeButton={true}
         toastOptions={{
           style: {
             fontSize: "0.8rem",

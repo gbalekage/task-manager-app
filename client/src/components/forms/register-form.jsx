@@ -41,7 +41,8 @@ export function RegisterForm({ className, ...props }) {
     } catch (error) {
       console.log(error);
       toast.error(
-        error.response?.data?.message || "An error occurred while create account"
+        error.response?.data?.message ||
+          "An error occurred while create account"
       );
     } finally {
       setLoading(false);
@@ -51,7 +52,6 @@ export function RegisterForm({ className, ...props }) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <form className="space-y-5" onSubmit={handleLoading}>
-        {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center">
           <Link to="/" className="flex flex-col items-center gap-2 font-medium">
             <div className="flex size-8 items-center justify-center rounded-md">
@@ -68,7 +68,6 @@ export function RegisterForm({ className, ...props }) {
           </p>
         </div>
 
-        {/* Name */}
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium">
             Name
@@ -84,7 +83,6 @@ export function RegisterForm({ className, ...props }) {
           />
         </div>
 
-        {/* Email */}
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
             Email
@@ -100,7 +98,6 @@ export function RegisterForm({ className, ...props }) {
           />
         </div>
 
-        {/* Password */}
         <div className="space-y-2">
           <label htmlFor="password" className="text-sm font-medium">
             Password
@@ -115,8 +112,6 @@ export function RegisterForm({ className, ...props }) {
             disabled={loading}
           />
         </div>
-
-        {/* Confirm Password */}
         <div className="space-y-2">
           <label htmlFor="confirm_password" className="text-sm font-medium">
             Confirm Password
@@ -132,7 +127,6 @@ export function RegisterForm({ className, ...props }) {
           />
         </div>
 
-        {/* Submit */}
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? (
             <Loader2 className="animate-spin size-4" />

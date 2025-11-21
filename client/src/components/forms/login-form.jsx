@@ -21,14 +21,12 @@ export function LoginForm({ className, ...props }) {
     try {
       const res = await api.post("/auth/login", { email, password });
 
-      // Save token and user ID
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
 
-      // Optional: small delay before navigation
       setTimeout(() => {
         navigate("/");
-      }, 50); // 50ms delay
+      }, 100);
     } catch (error) {
       console.log(error);
       toast.error(
@@ -42,7 +40,6 @@ export function LoginForm({ className, ...props }) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <form className="space-y-5" onSubmit={handleLoading}>
-        {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center">
           <Link to="/" className="flex flex-col items-center gap-2 font-medium">
             <div className="flex size-8 items-center justify-center rounded-md">
@@ -59,7 +56,6 @@ export function LoginForm({ className, ...props }) {
           </p>
         </div>
 
-        {/* Email */}
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
             Email
@@ -74,7 +70,6 @@ export function LoginForm({ className, ...props }) {
           />
         </div>
 
-        {/* Password */}
         <div className="space-y-2">
           <label htmlFor="password" className="text-sm font-medium">
             Password
@@ -89,7 +84,6 @@ export function LoginForm({ className, ...props }) {
           />
         </div>
 
-        {/* Submit */}
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? <Loader2 className="animate-spin size-4" /> : <>Login</>}
         </Button>

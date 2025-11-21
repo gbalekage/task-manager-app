@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 
 const EditTaskModal = ({
   task,
@@ -28,6 +28,7 @@ const EditTaskModal = ({
           <Input
             placeholder="Title"
             value={editForm.title}
+            disabled={editing}
             onChange={(e) =>
               setEditForm({ ...editForm, title: e.target.value })
             }
@@ -44,7 +45,7 @@ const EditTaskModal = ({
             }}
             disabled={editing}
           >
-            {editing ? "Saving..." : "Save"}
+            {editing ? <Loader2 className="animate-spin size-4" /> : "Save"}
           </Button>
         </div>
       </div>

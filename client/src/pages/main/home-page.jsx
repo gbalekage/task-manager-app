@@ -184,15 +184,14 @@ const HomePage = () => {
 
   return (
     <div className="bg-background min-h-screen pb-24">
-      {/* Header */}
       <div className="sticky top-0 w-full bg-background z-50 shadow-md px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <h1 className="text-2xl font-bold text-foreground">
-            Hello, {user.name}
+          <h1 className="flex items-center gap-2">
+            <p className="text-xl font-bold text-foreground">Hello, </p>
+            <p className="text-xl text-foreground">{user.name}</p>
           </h1>
         </div>
 
-        {/* Task Filter Bar */}
         <div className="flex gap-2 mt-2 sm:mt-0">
           {["All", "In Progress", "Completed", "Not Started"].map((f) => (
             <Button
@@ -215,11 +214,10 @@ const HomePage = () => {
         </Button>
       </div>
 
-      {/* Task Cards */}
       {filteredTasks.length === 0 ? (
         <p className="flex items-center justify-center mt-6">No tasks</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 px-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 px-4 mt-6">
           {filteredTasks.map((task) => (
             <TaskCard
               key={task._id}
@@ -240,7 +238,6 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Add Task */}
       <AddTaskBar
         newTaskTitle={newTaskTitle}
         setNewTaskTitle={setNewTaskTitle}
@@ -248,7 +245,6 @@ const HomePage = () => {
         adding={adding}
       />
 
-      {/* Edit Modal */}
       {showEditModal && editingTask && (
         <EditTaskModal
           task={editingTask}
